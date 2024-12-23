@@ -1,0 +1,204 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "assembly-CursoCdkPrimerPipelineStack-ReactAppStage": {
+      "type": "cdk:cloud-assembly",
+      "properties": {
+        "directoryName": "assembly-CursoCdkPrimerPipelineStack-ReactAppStage",
+        "displayName": "CursoCdkPrimerPipelineStack/ReactAppStage"
+      }
+    },
+    "CursoCdkPrimerPipelineStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "CursoCdkPrimerPipelineStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "CursoCdkPrimerPipelineStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://038462756361/eu-west-1",
+      "properties": {
+        "templateFile": "CursoCdkPrimerPipelineStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-cfn-exec-role-038462756361-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-038462756361-eu-west-1/9c110b95ebaaa1bb6ec1c28972879c65fa67b6c1fd96a9dab7003408c2d58995.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "CursoCdkPrimerPipelineStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-lookup-role-038462756361-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "CursoCdkPrimerPipelineStack.assets"
+      ],
+      "metadata": {
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/ArtifactsBucketEncryptionKey/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineArtifactsBucketEncryptionKey94021595"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/ArtifactsBucketEncryptionKeyAlias/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineArtifactsBucketEncryptionKeyAlias2CE71547"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/ArtifactsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineArtifactsBucket830AD299"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/ArtifactsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineArtifactsBucketPolicyF0459275"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineRoleE3F28D69"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineRoleDefaultPolicy5CDBB5CF"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineB1A1BEA2"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Source/vicenxl_curso-cdk-primer-pipeline/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineSourcevicenxlcursocdkprimerpipelineCodePipelineActionRoleC6480CE5"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Source/vicenxl_curso-cdk-primer-pipeline/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineSourcevicenxlcursocdkprimerpipelineCodePipelineActionRoleDefaultPolicyFBA2A11B"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Build/Synth/CdkBuildProject/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineBuildSynthCdkBuildProjectRole6EF1C931"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Build/Synth/CdkBuildProject/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineBuildSynthCdkBuildProjectRoleDefaultPolicyA91CEA78"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Pipeline/Build/Synth/CdkBuildProject/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineBuildSynthCdkBuildProject976C10F3"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/CodeBuildActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineCodeBuildActionRole28BA3E0C"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/CodeBuildActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineCodeBuildActionRoleDefaultPolicyA6A0177D"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/UpdatePipeline/SelfMutation/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineUpdatePipelineSelfMutationRole9B65198C"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineUpdatePipelineSelfMutationRoleDefaultPolicyAA8CCA2A"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/UpdatePipeline/SelfMutation/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineUpdatePipelineSelfMutation81360810"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Assets/FileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineAssetsFileRoleDBBCC980"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Assets/FileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineAssetsFileRoleDefaultPolicy43508724"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Assets/FileAsset1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineAssetsFileAsset1416E4A07"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Assets/FileAsset2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineAssetsFileAsset2FD984081"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CdkPipeline/Assets/FileAsset3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CdkPipelineAssetsFileAsset3F5F50E93"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "CursoCdkPrimerPipelineStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

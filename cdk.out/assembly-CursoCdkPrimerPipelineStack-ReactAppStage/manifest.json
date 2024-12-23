@@ -1,0 +1,102 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://038462756361/eu-west-1",
+      "properties": {
+        "templateFile": "CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-cfn-exec-role-038462756361-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-038462756361-eu-west-1/3fb3f4d6ee0f7b069591e58c391615c80fc48dd0ddf238c97cb345e9f1a219ab.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-lookup-role-038462756361-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "ReactAppStage-ReactAppStack"
+      },
+      "dependencies": [
+        "CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets"
+      ],
+      "metadata": {
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactAppBucketE340E270"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactAppBucketPolicyC9C38628"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactAppDeploymentAwsCliLayer96EB08FF"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppDeployment/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactAppDeploymentCustomResource15C9DDF7"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack"
+    }
+  }
+}
