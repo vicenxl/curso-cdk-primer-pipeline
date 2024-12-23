@@ -25,12 +25,12 @@ export class CursoCdkPrimerPipelineStack extends cdk.Stack {
 
     pipeline.addStage(
       new ReactAppStage(this, "ReactAppStage", {
-        env: { account: "038462756361", region: "eu-west-1" },
+        env: { account: "794038234271", region: "eu-west-1" },
       })
     );
 
     pipeline.buildPipeline();
 
-    pipeline.pipeline.artifactBucket.grantRead(new iam.AccountPrincipal("038462756361"));
+    pipeline.pipeline.artifactBucket.grantRead(new iam.AccountPrincipal("794038234271"));
   }
 }
