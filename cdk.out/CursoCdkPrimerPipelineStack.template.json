@@ -21,7 +21,7 @@
        "Effect": "Allow",
        "Principal": {
         "AWS": [
-         "arn:aws:iam::038462756361:root",
+         "arn:aws:iam::794038234271:root",
          {
           "Fn::Join": [
            "",
@@ -30,7 +30,7 @@
             {
              "Ref": "AWS::Partition"
             },
-            ":iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1"
+            ":iam::794038234271:role/cdk-hnb659fds-deploy-role-794038234271-eu-west-1"
            ]
           ]
          }
@@ -147,7 +147,7 @@
        "Effect": "Allow",
        "Principal": {
         "AWS": [
-         "arn:aws:iam::038462756361:root",
+         "arn:aws:iam::794038234271:root",
          {
           "Fn::Join": [
            "",
@@ -156,7 +156,7 @@
             {
              "Ref": "AWS::Partition"
             },
-            ":iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1"
+            ":iam::794038234271:role/cdk-hnb659fds-deploy-role-794038234271-eu-west-1"
            ]
           ]
          }
@@ -295,7 +295,7 @@
            {
             "Ref": "AWS::Partition"
            },
-           ":iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1"
+           ":iam::794038234271:role/cdk-hnb659fds-deploy-role-794038234271-eu-west-1"
           ]
          ]
         }
@@ -544,7 +544,7 @@
             {
              "Ref": "AWS::Partition"
             },
-            ":iam::038462756361:role/cdk-hnb659fds-cfn-exec-role-038462756361-eu-west-1"
+            ":iam::794038234271:role/cdk-hnb659fds-cfn-exec-role-794038234271-eu-west-1"
            ]
           ]
          },
@@ -566,7 +566,7 @@
            {
             "Ref": "AWS::Partition"
            },
-           ":iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1"
+           ":iam::794038234271:role/cdk-hnb659fds-deploy-role-794038234271-eu-west-1"
           ]
          ]
         },
@@ -593,7 +593,7 @@
            {
             "Ref": "AWS::Partition"
            },
-           ":iam::038462756361:role/cdk-hnb659fds-deploy-role-038462756361-eu-west-1"
+           ":iam::794038234271:role/cdk-hnb659fds-deploy-role-794038234271-eu-west-1"
           ]
          ]
         },
@@ -1258,7 +1258,7 @@
        "Action": "sts:AssumeRole",
        "Effect": "Allow",
        "Resource": {
-        "Fn::Sub": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-file-publishing-role-038462756361-eu-west-1"
+        "Fn::Sub": "arn:${AWS::Partition}:iam::794038234271:role/cdk-hnb659fds-file-publishing-role-794038234271-eu-west-1"
        }
       },
       {
@@ -1348,7 +1348,7 @@
      ]
     },
     "Source": {
-     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-CursoCdkPrimerPipelineStack-ReactAppStage/CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json\\\" --verbose publish \\\"3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961:038462756361-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-CursoCdkPrimerPipelineStack-ReactAppStage/CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json\\\" --verbose publish \\\"3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961:794038234271-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
      "Type": "CODEPIPELINE"
     }
    },
@@ -1386,7 +1386,7 @@
      ]
     },
     "Source": {
-     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-CursoCdkPrimerPipelineStack-ReactAppStage/CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json\\\" --verbose publish \\\"e976a796f036a5efbf44b99e44cfb5a961df08d8dbf7cd37e60bf216fb982a00:038462756361-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-CursoCdkPrimerPipelineStack-ReactAppStage/CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json\\\" --verbose publish \\\"e976a796f036a5efbf44b99e44cfb5a961df08d8dbf7cd37e60bf216fb982a00:794038234271-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
      "Type": "CODEPIPELINE"
     }
    },
@@ -1424,7 +1424,7 @@
      ]
     },
     "Source": {
-     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-CursoCdkPrimerPipelineStack-ReactAppStage/CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json\\\" --verbose publish \\\"734043c641bc707cd7f7ea12b1b94af364af45fd21df81c57c69da073210bf87:038462756361-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-CursoCdkPrimerPipelineStack-ReactAppStage/CursoCdkPrimerPipelineStackReactAppStageReactAppStackA104C65E.assets.json\\\" --verbose publish \\\"734043c641bc707cd7f7ea12b1b94af364af45fd21df81c57c69da073210bf87:794038234271-eu-west-1\\\"\"\n      ]\n    }\n  }\n}",
      "Type": "CODEPIPELINE"
     }
    },

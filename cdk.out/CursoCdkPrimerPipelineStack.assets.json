@@ -1,7 +1,7 @@
 {
   "version": "36.0.0",
   "files": {
-    "9c110b95ebaaa1bb6ec1c28972879c65fa67b6c1fd96a9dab7003408c2d58995": {
+    "056fb487b4ba1a8f1106ff98d15edbc3a8e9cfd329f9f64dd07faf160e74b0db": {
       "source": {
         "path": "CursoCdkPrimerPipelineStack.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "038462756361-eu-west-1": {
           "bucketName": "cdk-hnb659fds-assets-038462756361-eu-west-1",
-          "objectKey": "9c110b95ebaaa1bb6ec1c28972879c65fa67b6c1fd96a9dab7003408c2d58995.json",
+          "objectKey": "056fb487b4ba1a8f1106ff98d15edbc3a8e9cfd329f9f64dd07faf160e74b0db.json",
           "region": "eu-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::038462756361:role/cdk-hnb659fds-file-publishing-role-038462756361-eu-west-1"
         }

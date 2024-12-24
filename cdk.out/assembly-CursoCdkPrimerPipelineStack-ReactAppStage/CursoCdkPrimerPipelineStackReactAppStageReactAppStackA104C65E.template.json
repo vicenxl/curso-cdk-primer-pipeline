@@ -63,7 +63,7 @@
    "Type": "AWS::Lambda::LayerVersion",
    "Properties": {
     "Content": {
-     "S3Bucket": "cdk-hnb659fds-assets-038462756361-eu-west-1",
+     "S3Bucket": "cdk-hnb659fds-assets-794038234271-eu-west-1",
      "S3Key": "3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip"
     },
     "Description": "/opt/awscli/aws"
@@ -85,7 +85,7 @@
      ]
     },
     "SourceBucketNames": [
-     "cdk-hnb659fds-assets-038462756361-eu-west-1"
+     "cdk-hnb659fds-assets-794038234271-eu-west-1"
     ],
     "SourceObjectKeys": [
      "734043c641bc707cd7f7ea12b1b94af364af45fd21df81c57c69da073210bf87.zip"
@@ -148,8 +148,8 @@
        ],
        "Effect": "Allow",
        "Resource": [
-        "arn:aws:s3:::cdk-hnb659fds-assets-038462756361-eu-west-1",
-        "arn:aws:s3:::cdk-hnb659fds-assets-038462756361-eu-west-1/*"
+        "arn:aws:s3:::cdk-hnb659fds-assets-794038234271-eu-west-1",
+        "arn:aws:s3:::cdk-hnb659fds-assets-794038234271-eu-west-1/*"
        ]
       },
       {
@@ -207,7 +207,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-038462756361-eu-west-1",
+     "S3Bucket": "cdk-hnb659fds-assets-794038234271-eu-west-1",
      "S3Key": "e976a796f036a5efbf44b99e44cfb5a961df08d8dbf7cd37e60bf216fb982a00.zip"
     },
     "Environment": {
