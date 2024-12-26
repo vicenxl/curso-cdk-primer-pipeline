@@ -17,9 +17,76 @@ export class ReactAppStack extends cdk.Stack {
       }),
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
-    new s3Deployment.BucketDeployment(this, "ReactAppDeployment", {
-      sources: [s3Deployment.Source.asset("./react-app")],
-      destinationBucket: bucket,
+    
+    const reactPipeline = new codepipeline.Pipeline(this, "ReactPipeline", {
+      pipelineName: `react-app-pipeline`,
+    });
+
+    const sourceOutput = new codepipeline.Artifact();
+    const sourceAction = new codepipelineActions.CodeStarConnectionsSourceAction({
+      actionName: "GithubCommitV2",
+      connectionArn:
+        "arn:aws:codeconnections:eu-west-1:794038234271:connection/0e9bffa5-02cb-4512-9be7-425f5c2dd17a",
+      owner: "vicenxl",
+      repo: "my-react-app",
+      branch: "main",
+      output: sourceOutput,
+    });
+
+    const project = new codebuild.PipelineProject(this, "ReactProject", {
+      buildSpec: codebuild.BuildSpec.fromObject({
+        version: "0.2",
+        env: {
+          shell: "bash",
+        },
+        phases: {
+          pre_build: {
+            commands: ["echo $CODEBUILD_RESOLVED_SOURCE_VERSION", "npm install"],
+          },
+          build: {
+            commands: ["echo Build started on `date`", "npm run build"],
+          },
+          post_build: {
+            commands: ["echo Build completed on `date`"],
+          },
+        },
+        artifacts: {
+          files: ["**/*"],
+          "base-directory": "build",
+        },
+      }),
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.STANDARD_7_0,
+        privileged: true,
+        computeType: codebuild.ComputeType.MEDIUM,
+      },
+    });
+
+    const buildOutput = new codepipeline.Artifact();
+    const buildAction = new codepipelineActions.CodeBuildAction({
+      actionName: "CodeBuild",
+      project,
+      input: sourceOutput,
+      outputs: [buildOutput],
+    });
+
+    const deployAction = new codepipelineActions.S3DeployAction({
+      actionName: "DeployAction",
+      bucket,
+      input: buildOutput,
+    });
+
+    reactPipeline.addStage({
+      stageName: "Source",
+      actions: [sourceAction],
+    });
+    reactPipeline.addStage({
+      stageName: "Build",
+      actions: [buildAction],
+    });
+    reactPipeline.addStage({
+      stageName: "Deploy",
+      actions: [deployAction],
     });
   }
 }
