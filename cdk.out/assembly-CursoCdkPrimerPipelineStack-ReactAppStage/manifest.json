@@ -18,7 +18,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::794038234271:role/cdk-hnb659fds-deploy-role-794038234271-eu-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::794038234271:role/cdk-hnb659fds-cfn-exec-role-794038234271-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-794038234271-eu-west-1/46290365591415cab9b9463618cf87d4a4865f03facf4d51be50ac63ed61a2c1.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-794038234271-eu-west-1/397bfab54a271a55ecbf6d135f055cb0117b647a9cb7f9e3a86a664d6d58ceaf.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -47,34 +47,100 @@
             "data": "ReactAppBucketPolicyC9C38628"
           }
         ],
-        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppDeployment/AwsCliLayer/Resource": [
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucketEncryptionKey/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ReactAppDeploymentAwsCliLayer96EB08FF"
+            "data": "ReactPipelineArtifactsBucketEncryptionKey5555A068"
           }
         ],
-        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppDeployment/CustomResource/Default": [
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucketEncryptionKeyAlias/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ReactAppDeploymentCustomResource15C9DDF7"
+            "data": "ReactPipelineArtifactsBucketEncryptionKeyAlias7A8B816D"
           }
         ],
-        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+            "data": "ReactPipelineArtifactsBucket1DB6DAC0"
           }
         ],
-        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+            "data": "ReactPipelineArtifactsBucketPolicyD454D9D0"
           }
         ],
-        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+            "data": "ReactPipelineRoleCA8FB37F"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineRoleDefaultPolicy4DE7A197"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipeline276F0E4C"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Source/GithubCommit/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineSourceGithubCommitCodePipelineActionRoleE09E358C"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Source/GithubCommit/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineSourceGithubCommitCodePipelineActionRoleDefaultPolicy8FA221DF"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Build/CodeBuild/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineBuildCodeBuildCodePipelineActionRole5BB871E1"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Build/CodeBuild/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineBuildCodeBuildCodePipelineActionRoleDefaultPolicyED8B6B58"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Deploy/DeployAction/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineDeployDeployActionCodePipelineActionRole19C51679"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Deploy/DeployAction/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactPipelineDeployDeployActionCodePipelineActionRoleDefaultPolicyA5B4C1D7"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactProject/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactProjectRole59A9A068"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactProject/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactProjectRoleDefaultPolicyD33570D5"
+          }
+        ],
+        "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactProject/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReactProjectCBB351CF"
           }
         ],
         "/CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/CDKMetadata/Default": [

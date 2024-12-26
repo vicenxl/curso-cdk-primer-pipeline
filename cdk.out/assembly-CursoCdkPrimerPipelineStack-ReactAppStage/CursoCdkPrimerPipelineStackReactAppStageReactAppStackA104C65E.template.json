@@ -8,13 +8,7 @@
      "BlockPublicPolicy": false,
      "IgnorePublicAcls": false,
      "RestrictPublicBuckets": false
-    },
-    "Tags": [
-     {
-      "Key": "aws-cdk:cr-owned:b05beb52",
-      "Value": "true"
-     }
-    ]
+    }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
@@ -59,49 +53,128 @@
     "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppBucket/Policy/Resource"
    }
   },
-  "ReactAppDeploymentAwsCliLayer96EB08FF": {
-   "Type": "AWS::Lambda::LayerVersion",
+  "ReactPipelineArtifactsBucketEncryptionKey5555A068": {
+   "Type": "AWS::KMS::Key",
    "Properties": {
-    "Content": {
-     "S3Bucket": "cdk-hnb659fds-assets-794038234271-eu-west-1",
-     "S3Key": "3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip"
-    },
-    "Description": "/opt/awscli/aws"
-   },
-   "Metadata": {
-    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppDeployment/AwsCliLayer/Resource",
-    "aws:asset:path": "..\\asset.3322b7049fb0ed2b7cbb644a2ada8d1116ff80c32dca89e6ada846b5de26f961.zip",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Content"
-   }
-  },
-  "ReactAppDeploymentCustomResource15C9DDF7": {
-   "Type": "Custom::CDKBucketDeployment",
-   "Properties": {
-    "ServiceToken": {
-     "Fn::GetAtt": [
-      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
-      "Arn"
-     ]
-    },
-    "SourceBucketNames": [
-     "cdk-hnb659fds-assets-794038234271-eu-west-1"
-    ],
-    "SourceObjectKeys": [
-     "734043c641bc707cd7f7ea12b1b94af364af45fd21df81c57c69da073210bf87.zip"
-    ],
-    "DestinationBucketName": {
-     "Ref": "ReactAppBucketE340E270"
-    },
-    "Prune": true
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::794038234271:root"
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactAppDeployment/CustomResource/Default"
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucketEncryptionKey/Resource"
    }
   },
-  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+  "ReactPipelineArtifactsBucketEncryptionKeyAlias7A8B816D": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/codepipeline-reactappstage-reactappstack-reactpipeline-96775e9b",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+      "Arn"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucketEncryptionKeyAlias/Resource"
+   }
+  },
+  "ReactPipelineArtifactsBucket1DB6DAC0": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": {
+         "Fn::GetAtt": [
+          "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+          "Arn"
+         ]
+        },
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucket/Resource"
+   }
+  },
+  "ReactPipelineArtifactsBucketPolicyD454D9D0": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "ReactPipelineArtifactsBucket1DB6DAC0"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineArtifactsBucket1DB6DAC0",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ReactPipelineArtifactsBucket1DB6DAC0",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/ArtifactsBucket/Policy/Resource"
+   }
+  },
+  "ReactPipelineRoleCA8FB37F": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -110,47 +183,277 @@
        "Action": "sts:AssumeRole",
        "Effect": "Allow",
        "Principal": {
-        "Service": "lambda.amazonaws.com"
+        "Service": "codepipeline.amazonaws.com"
        }
       }
      ],
      "Version": "2012-10-17"
-    },
-    "ManagedPolicyArns": [
-     {
-      "Fn::Join": [
-       "",
-       [
-        "arn:",
-        {
-         "Ref": "AWS::Partition"
-        },
-        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-       ]
-      ]
-     }
-    ]
+    }
    },
    "Metadata": {
-    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource"
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Role/Resource"
    }
   },
-  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+  "ReactPipelineRoleDefaultPolicy4DE7A197": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
      "Statement": [
       {
        "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
         "s3:GetBucket*",
         "s3:GetObject*",
-        "s3:List*"
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
        ],
        "Effect": "Allow",
        "Resource": [
-        "arn:aws:s3:::cdk-hnb659fds-assets-794038234271-eu-west-1",
-        "arn:aws:s3:::cdk-hnb659fds-assets-794038234271-eu-west-1/*"
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineArtifactsBucket1DB6DAC0",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ReactPipelineArtifactsBucket1DB6DAC0",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
        ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineBuildCodeBuildCodePipelineActionRole5BB871E1",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineDeployDeployActionCodePipelineActionRole19C51679",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineSourceGithubCommitCodePipelineActionRoleE09E358C",
+          "Arn"
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ReactPipelineRoleDefaultPolicy4DE7A197",
+    "Roles": [
+     {
+      "Ref": "ReactPipelineRoleCA8FB37F"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Role/DefaultPolicy/Resource"
+   }
+  },
+  "ReactPipeline276F0E4C": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "ArtifactStore": {
+     "EncryptionKey": {
+      "Id": {
+       "Fn::GetAtt": [
+        "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+        "Arn"
+       ]
+      },
+      "Type": "KMS"
+     },
+     "Location": {
+      "Ref": "ReactPipelineArtifactsBucket1DB6DAC0"
+     },
+     "Type": "S3"
+    },
+    "Name": "react-app-pipeline",
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "ReactPipelineRoleCA8FB37F",
+      "Arn"
+     ]
+    },
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "CodeStarSourceConnection",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ConnectionArn": "arn:aws:codeconnections:eu-west-1:794038234271:connection/0e9bffa5-02cb-4512-9be7-425f5c2dd17a",
+         "FullRepositoryId": "vicenxl/my-react-app",
+         "BranchName": "main"
+        },
+        "Name": "GithubCommit",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Source_GithubCommit"
+         }
+        ],
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "ReactPipelineSourceGithubCommitCodePipelineActionRoleE09E358C",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "ReactProjectCBB351CF"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "Artifact_Source_GithubCommit"
+         }
+        ],
+        "Name": "CodeBuild",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Build_CodeBuild"
+         }
+        ],
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "ReactPipelineBuildCodeBuildCodePipelineActionRole5BB871E1",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Build"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "S3",
+         "Version": "1"
+        },
+        "Configuration": {
+         "BucketName": {
+          "Ref": "ReactAppBucketE340E270"
+         },
+         "Extract": "true"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "Artifact_Build_CodeBuild"
+         }
+        ],
+        "Name": "DeployAction",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "ReactPipelineDeployDeployActionCodePipelineActionRole19C51679",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Deploy"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ReactPipelineRoleDefaultPolicy4DE7A197",
+    "ReactPipelineRoleCA8FB37F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Resource"
+   }
+  },
+  "ReactPipelineSourceGithubCommitCodePipelineActionRoleE09E358C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::794038234271:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Source/GithubCommit/CodePipelineActionRole/Resource"
+   }
+  },
+  "ReactPipelineSourceGithubCommitCodePipelineActionRoleDefaultPolicy8FA221DF": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codestar-connections:UseConnection",
+       "Effect": "Allow",
+       "Resource": "arn:aws:codeconnections:eu-west-1:794038234271:connection/0e9bffa5-02cb-4512-9be7-425f5c2dd17a"
       },
       {
        "Action": [
@@ -159,6 +462,169 @@
         "s3:GetBucket*",
         "s3:GetObject*",
         "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineArtifactsBucket1DB6DAC0",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ReactPipelineArtifactsBucket1DB6DAC0",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:PutObjectAcl",
+        "s3:PutObjectVersionAcl"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "ReactPipelineArtifactsBucket1DB6DAC0",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ReactPipelineSourceGithubCommitCodePipelineActionRoleDefaultPolicy8FA221DF",
+    "Roles": [
+     {
+      "Ref": "ReactPipelineSourceGithubCommitCodePipelineActionRoleE09E358C"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Source/GithubCommit/CodePipelineActionRole/DefaultPolicy/Resource"
+   }
+  },
+  "ReactPipelineBuildCodeBuildCodePipelineActionRole5BB871E1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::794038234271:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Build/CodeBuild/CodePipelineActionRole/Resource"
+   }
+  },
+  "ReactPipelineBuildCodeBuildCodePipelineActionRoleDefaultPolicyED8B6B58": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ReactProjectCBB351CF",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ReactPipelineBuildCodeBuildCodePipelineActionRoleDefaultPolicyED8B6B58",
+    "Roles": [
+     {
+      "Ref": "ReactPipelineBuildCodeBuildCodePipelineActionRole5BB871E1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Build/CodeBuild/CodePipelineActionRole/DefaultPolicy/Resource"
+   }
+  },
+  "ReactPipelineDeployDeployActionCodePipelineActionRole19C51679": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::794038234271:root"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Deploy/DeployAction/CodePipelineActionRole/Resource"
+   }
+  },
+  "ReactPipelineDeployDeployActionCodePipelineActionRoleDefaultPolicyA5B4C1D7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
         "s3:PutObject",
         "s3:PutObjectLegalHold",
         "s3:PutObjectRetention",
@@ -188,63 +654,252 @@
          ]
         }
        ]
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineArtifactsBucket1DB6DAC0",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ReactPipelineArtifactsBucket1DB6DAC0",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+         "Arn"
+        ]
+       }
       }
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "PolicyName": "ReactPipelineDeployDeployActionCodePipelineActionRoleDefaultPolicyA5B4C1D7",
     "Roles": [
      {
-      "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+      "Ref": "ReactPipelineDeployDeployActionCodePipelineActionRole19C51679"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource"
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactPipeline/Deploy/DeployAction/CodePipelineActionRole/DefaultPolicy/Resource"
    }
   },
-  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
-   "Type": "AWS::Lambda::Function",
+  "ReactProjectRole59A9A068": {
+   "Type": "AWS::IAM::Role",
    "Properties": {
-    "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-794038234271-eu-west-1",
-     "S3Key": "e976a796f036a5efbf44b99e44cfb5a961df08d8dbf7cd37e60bf216fb982a00.zip"
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactProject/Role/Resource"
+   }
+  },
+  "ReactProjectRoleDefaultPolicyD33570D5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:logs:eu-west-1:794038234271:log-group:/aws/codebuild/",
+           {
+            "Ref": "ReactProjectCBB351CF"
+           },
+           ":*"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:logs:eu-west-1:794038234271:log-group:/aws/codebuild/",
+           {
+            "Ref": "ReactProjectCBB351CF"
+           }
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:aws:codebuild:eu-west-1:794038234271:report-group/",
+          {
+           "Ref": "ReactProjectCBB351CF"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:Abort*",
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ReactPipelineArtifactsBucket1DB6DAC0",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ReactPipelineArtifactsBucket1DB6DAC0",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey*",
+        "kms:ReEncrypt*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "ReactPipelineArtifactsBucketEncryptionKey5555A068",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
     },
-    "Environment": {
-     "Variables": {
-      "AWS_CA_BUNDLE": "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
-     }
-    },
-    "Handler": "index.handler",
-    "Layers": [
+    "PolicyName": "ReactProjectRoleDefaultPolicyD33570D5",
+    "Roles": [
      {
-      "Ref": "ReactAppDeploymentAwsCliLayer96EB08FF"
+      "Ref": "ReactProjectRole59A9A068"
      }
-    ],
-    "Role": {
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactProject/Role/DefaultPolicy/Resource"
+   }
+  },
+  "ReactProjectCBB351CF": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": {
      "Fn::GetAtt": [
-      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+      "ReactPipelineArtifactsBucketEncryptionKey5555A068",
       "Arn"
      ]
     },
-    "Runtime": "python3.9",
-    "Timeout": 900
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_MEDIUM",
+     "Image": "aws/codebuild/standard:7.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": true,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "ReactProjectRole59A9A068",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"env\": {\n    \"shell\": \"bash\"\n  },\n  \"phases\": {\n    \"pre_build\": {\n      \"commands\": [\n        \"echo $CODEBUILD_RESOLVED_SOURCE_VERSION\",\n        \"npm install\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"echo Build started on `date`\",\n        \"npm run build\"\n      ]\n    },\n    \"post_build\": {\n      \"commands\": [\n        \"echo Build completed on `date`\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"files\": [\n      \"**/*\"\n    ],\n    \"base-directory\": \"build\"\n  }\n}",
+     "Type": "CODEPIPELINE"
+    }
    },
-   "DependsOn": [
-    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
-    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
-   ],
    "Metadata": {
-    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
-    "aws:asset:path": "..\\asset.e976a796f036a5efbf44b99e44cfb5a961df08d8dbf7cd37e60bf216fb982a00",
-    "aws:asset:is-bundled": false,
-    "aws:asset:property": "Code"
+    "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/ReactProject/Resource"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0WOwW6DMAyGn6X34FF62Lll2mmHCaRdkRsMcgnJhMMQinj3CVLo6f/8WfLvDM5ZBukJJ0l03SWG7xBKj7pTOEkV5ALhNuqOvMob+6QY386wnl/6OcfhhkKLkksVavo1bu7Jeoirj0MoFCEvcF1jUQb7e40Q8sZ+4UzDDw3CzqqSbWvIO/s5Wu1Xc0DeHHJRjD2Ewhla9ZavFyMte0ll1oIKJ9GG4TpJbnjrVNsvpceWbavyUbzrCxI3Djqe3XmHRVlXEzzk7S9L4fwO6ekhzMkwWs89QRHzHzsytPJoAQAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02OwQ6CMBBEv4V7WbEePKtHLwQ/wJSyJktLS1iQmKb/bigYPM2bzc7OSjhKCUWmZs51Y3JLNYTHqLQRauZn4BOE66QNjuL2chutUnpL+rOPVx+F9g321KMlhxDKjZa9H0dhOoZwx5Re5GJJ8WISREGqg1B5m2JJ97b/nnoi2+wl5eBb1OnVDWMUFbKfBr2e2jgK5xuElg9vWcDxDEXWMlE+TG6kDqFa9QtEYGMrHgEAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "CursoCdkPrimerPipelineStack/ReactAppStage/ReactAppStack/CDKMetadata/Default"

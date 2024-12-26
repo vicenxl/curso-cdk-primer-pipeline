@@ -1,7 +1,9 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
-import * as s3Deployment from "aws-cdk-lib/aws-s3-deployment";
+import * as codepipeline from "aws-cdk-lib/aws-codepipeline";
+import * as codepipelineActions from "aws-cdk-lib/aws-codepipeline-actions";
+import * as codebuild from "aws-cdk-lib/aws-codebuild";
 
 export class ReactAppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StageProps) {
@@ -24,7 +26,7 @@ export class ReactAppStack extends cdk.Stack {
 
     const sourceOutput = new codepipeline.Artifact();
     const sourceAction = new codepipelineActions.CodeStarConnectionsSourceAction({
-      actionName: "GithubCommitV2",
+      actionName: "GithubCommit",
       connectionArn:
         "arn:aws:codeconnections:eu-west-1:794038234271:connection/0e9bffa5-02cb-4512-9be7-425f5c2dd17a",
       owner: "vicenxl",
